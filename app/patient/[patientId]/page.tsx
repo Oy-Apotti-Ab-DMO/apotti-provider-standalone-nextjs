@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -24,7 +24,7 @@ interface ObservationEntry {
   };
 }
 
-export default function ProviderPatientPage() {
+function PatientContent() {
   const params = useParams();
   const searchParams = useSearchParams();
   const patientId = params?.patientId as string;
@@ -210,5 +210,13 @@ export default function ProviderPatientPage() {
         <p className="empty-state">No vital sign observations found for this patient.</p>
       )}
     </div>
+  );
+}
+
+export default function ProviderPatientPage() {
+  return (
+    <Suspense fallback={<div className="container"><p className="loading">Loading patient records...</p></div>}>
+      <PatientContent />
+    </Suspense>
   );
 }

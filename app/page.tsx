@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import "./styles/HomePage.css";
 
-export default function HomePage() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const accessToken = searchParams.get("accessToken");
   const patientId = searchParams.get("patientId");
@@ -24,7 +24,6 @@ export default function HomePage() {
     
     // SMART on FHIR standalone provider launch:
     // includes 'launch/patient' so Epic prompts the provider to select a patient.
-    // Epic OAuth scopes typically: openid fhirUser launch/patient patient/*.read user/*.read
     const scopes = encodeURIComponent(
       "openid profile fhirUser launch/patient patient/*.read user/*.read"
     );
@@ -98,5 +97,13 @@ export default function HomePage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="container"><p>Loading...</p></div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
