@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fi.apotti.patient",
+      "sha256_cert_fingerprints": [
+        "E7:73:71:D8:15:67:7B:7D:65:68:2D:BA:9C:C0:D7:DE:90:BC:3B:24:82:AE:88:CC:44:76:FE:77:BF:79:60:17"
+      ]
+    }
+  }
+]
